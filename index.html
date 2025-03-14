@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Webhook Hilfe</title>
+    <script>
+        function sendToWebhook() {
+            const webhookURL = 'https://discord.com/api/webhooks/1350184348338491402/rxptdea5Gz7t8Ghu3Ih5MZfTgcvD5Jpbdr_vTe2Ke3YQl_6sDfSBupEiGJCSrTfSgBIu';  // Webhook-URL
+            const message = document.getElementById('message').value;
+
+            // Prüfe, ob das Textfeld nicht leer ist
+            if (!message) {
+                alert('Bitte gib eine Nachricht ein.');
+                return;
+            }
+
+            // Erstelle die Payload für den Webhook
+            const data = {
+                content: message
+            };
+
+            // Sende die Nachricht an den Webhook
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Nachricht erfolgreich gesendet!');
+                } else {
+                    alert('Fehler beim Senden der Nachricht.');
+                }
+            })
+            .catch(error => {
+                console.error('Fehler:', error);
+                alert('Es gab einen Fehler beim Senden der Nachricht.');
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Hilfe über Discord Webhook senden</h1>
+    <form onsubmit="event.preventDefault(); sendToWebhook();">
+        <label for="message">Nachricht:</label><br>
+        <textarea id="message" rows="4" cols="50" placeholder="Gib deine Nachricht ein..."></textarea><br><br>
+        <button type="submit">Nachricht senden</button>
+    </form>
+</body>
+</html>
