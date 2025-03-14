@@ -13,7 +13,7 @@
 
             // Prüfe, ob die Felder nicht leer sind
             if (!username || !issue || !message) {
-                alert('Bitte fülle alle Felder aus.');
+                alert('fill.');
                 return;
             }
 
@@ -33,9 +33,9 @@
             })
             .then(response => {
                 if (response.ok) {
-                    alert('Nachricht erfolgreich gesendet!');
+                    alert('message send!');
                 } else {
-                    alert('Fehler beim Senden der Nachricht.');
+                    alert('Failed to send message.');
                 }
             })
             .catch(error => {
